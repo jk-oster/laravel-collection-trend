@@ -3,8 +3,8 @@
 namespace JkOster\CollectionTrend\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use JkOster\CollectionTrend\CollectionTrendServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {

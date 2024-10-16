@@ -2,10 +2,10 @@
 
 namespace JkOster\CollectionTrend\Tests;
 
-use PHPUnit\Framework\TestCase;
+use Illuminate\Support\Carbon;
 use JkOster\CollectionTrend\CollectionTrend;
 use JkOster\CollectionTrend\CollectionTrendValue;
-use Illuminate\Support\Carbon;
+use PHPUnit\Framework\TestCase;
 
 class CollectionTrendTest extends TestCase
 {
@@ -18,30 +18,30 @@ class CollectionTrendTest extends TestCase
     }
 
     public static array $collection = [
-            ['created_at' => '2022-01-01', 'value' => 1],
-            ['created_at' => '2022-01-01', 'value' => 2],
-            ['created_at' => '2022-01-01', 'value' => 3],
+        ['created_at' => '2022-01-01', 'value' => 1],
+        ['created_at' => '2022-01-01', 'value' => 2],
+        ['created_at' => '2022-01-01', 'value' => 3],
 
-            ['created_at' => '2022-01-02', 'value' => 4],
-            ['created_at' => '2022-01-02', 'value' => 5],
-            ['created_at' => '2022-01-02', 'value' => 6],
+        ['created_at' => '2022-01-02', 'value' => 4],
+        ['created_at' => '2022-01-02', 'value' => 5],
+        ['created_at' => '2022-01-02', 'value' => 6],
 
-            ['created_at' => '2022-01-03', 'value' => 7],
-            ['created_at' => '2022-01-03', 'value' => 8],
-            ['created_at' => '2022-01-03', 'value' => 9],
+        ['created_at' => '2022-01-03', 'value' => 7],
+        ['created_at' => '2022-01-03', 'value' => 8],
+        ['created_at' => '2022-01-03', 'value' => 9],
 
-            // ['created_at' => '2022-01-04', 'value' => 10],
-            // ['created_at' => '2022-01-04', 'value' => 11],
-            // ['created_at' => '2022-01-04', 'value' => 12],
+        // ['created_at' => '2022-01-04', 'value' => 10],
+        // ['created_at' => '2022-01-04', 'value' => 11],
+        // ['created_at' => '2022-01-04', 'value' => 12],
 
-            ['created_at' => '2022-01-05', 'value' => 13],
-            ['created_at' => '2022-01-05', 'value' => 14],
-            ['created_at' => '2022-01-05', 'value' => 15],
+        ['created_at' => '2022-01-05', 'value' => 13],
+        ['created_at' => '2022-01-05', 'value' => 14],
+        ['created_at' => '2022-01-05', 'value' => 15],
 
-            ['created_at' => '2022-01-06', 'value' => 16],
-            ['created_at' => '2022-01-06', 'value' => 17],
-            ['created_at' => '2022-01-06', 'value' => 18],
-        ];
+        ['created_at' => '2022-01-06', 'value' => 16],
+        ['created_at' => '2022-01-06', 'value' => 17],
+        ['created_at' => '2022-01-06', 'value' => 18],
+    ];
 
     public function test_collection_trend_sum(): void
     {
@@ -248,7 +248,7 @@ class CollectionTrendTest extends TestCase
             new CollectionTrendValue(
                 date: '2022-01',
                 aggregate: 6,
-            )
+            ),
         ], $trend);
     }
 
@@ -277,7 +277,7 @@ class CollectionTrendTest extends TestCase
             new CollectionTrendValue(
                 date: '2022-01-02 00:00',
                 aggregate: 4,
-            )
+            ),
         ], $trend);
     }
 
@@ -296,7 +296,7 @@ class CollectionTrendTest extends TestCase
             new CollectionTrendValue(
                 date: '2022-01',
                 aggregate: 9,
-            )
+            ),
         ], $trend);
     }
 
@@ -315,7 +315,7 @@ class CollectionTrendTest extends TestCase
             new CollectionTrendValue(
                 date: '2022',
                 aggregate: 9,
-            )
+            ),
         ], $trend);
     }
 
@@ -350,10 +350,7 @@ class CollectionTrendTest extends TestCase
         ], $trend);
     }
 
-    public function test_collection_trend_exception(): void
-    {
-
-    }
+    public function test_collection_trend_exception(): void {}
 
     public function test_collection_trend_date_column_closure(): void
     {
@@ -362,7 +359,7 @@ class CollectionTrendTest extends TestCase
                 start: Carbon::parse('2022-01-02'),
                 end: Carbon::parse('2022-01-05'),
             )
-            ->dateColumn(fn($item) => $item['created_at'])
+            ->dateColumn(fn ($item) => $item['created_at'])
             ->perDay()
             ->count()
             ->toArray();
@@ -395,7 +392,7 @@ class CollectionTrendTest extends TestCase
                 end: Carbon::parse('2022-01-05'),
             )
             ->perDay()
-            ->count(fn($item) => $item['value'])
+            ->count(fn ($item) => $item['value'])
             ->toArray();
 
         $this->assertEquals([
@@ -417,5 +414,4 @@ class CollectionTrendTest extends TestCase
             ),
         ], $trend);
     }
-
 }

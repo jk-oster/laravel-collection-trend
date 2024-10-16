@@ -2,12 +2,12 @@
 
 namespace JkOster\CollectionTrend;
 
-use Illuminate\Support\Collection;
+use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Carbon\CarbonPeriod;
-use Carbon\Carbon;
 use Closure;
 use Error;
+use Illuminate\Support\Collection;
 use JkOster\CollectionTrend\CollectionTrendValue as TrendValue;
 
 class CollectionTrend implements ITrend
@@ -22,8 +22,9 @@ class CollectionTrend implements ITrend
 
     public string|Closure|null $valueColumn;
 
-    public function __construct(public Collection|array $collection) {
-        if(is_array($collection)) {
+    public function __construct(public Collection|array $collection)
+    {
+        if (is_array($collection)) {
             $this->collection = collect($collection);
         }
     }
@@ -85,7 +86,8 @@ class CollectionTrend implements ITrend
 
     /**
      * Set date column as a column name or how the date value should be retrieved from the collection item.
-     * @param string|Closure $column Column name or closure returning date column value
+     *
+     * @param  string|Closure  $column  Column name or closure returning date column value
      */
     public function dateColumn(string|Closure $column): self
     {
@@ -106,7 +108,7 @@ class CollectionTrend implements ITrend
         }
 
         if (! $itemDate) {
-            throw new Error('Invalid date column: "' . $this->dateColumn . '". Defined date column did not match any column in the collection item or returned null.');
+            throw new Error('Invalid date column: "'.$this->dateColumn.'". Defined date column did not match any column in the collection item or returned null.');
         }
 
         if (! $itemDate instanceof CarbonInterface) {
@@ -124,6 +126,7 @@ class CollectionTrend implements ITrend
     {
         if ($this->valueColumn instanceof Closure) {
             $valueClosure = $this->valueColumn;
+
             return $valueClosure($item);
         } elseif (is_string($this->valueColumn)) {
             return is_array($item) ? $item[$this->valueColumn] : $item->{$this->valueColumn};
@@ -134,13 +137,13 @@ class CollectionTrend implements ITrend
 
     public function mapValuesToDates(Collection $values, int $filler = 0): Collection
     {
-        $values = $values->map(fn(mixed $aggregate, string $date) => new TrendValue(
+        $values = $values->map(fn (mixed $aggregate, string $date) => new TrendValue(
             date: $date,
             aggregate: $aggregate,
         ));
 
         $placeholders = $this->getDatePeriod()->map(
-            fn(CarbonInterface $date) => new TrendValue(
+            fn (CarbonInterface $date) => new TrendValue(
                 date: $date->isoFormat($this->getCarbonDateIsoFormat()),
                 aggregate: $filler,
             )
@@ -172,14 +175,15 @@ class CollectionTrend implements ITrend
             'week' => 'GGGG-[W]WW',
             'month' => 'YYYY-MM',
             'year' => 'YYYY',
-            default => throw new Error('Invalid interval: ' . $this->interval . '. Available intervals: "minute", "hour", "day", "week", "month", "year".')
+            default => throw new Error('Invalid interval: '.$this->interval.'. Available intervals: "minute", "hour", "day", "week", "month", "year".')
         };
     }
 
     /**
      * Aggregates collection values within date range grouped by date interval.
-     * @param string|Closure $valueColumn column name or closure returning the value to be aggregated from a collection item.
-     * @param string|Closure $aggregate aggregation function name or closure returning an aggregated value from value collection.
+     *
+     * @param  string|Closure  $valueColumn  column name or closure returning the value to be aggregated from a collection item.
+     * @param  string|Closure  $aggregate  aggregation function name or closure returning an aggregated value from value collection.
      */
     public function aggregate(string|Closure|null $valueColumn, string|Closure $aggregate, int $filler = 0): Collection
     {
@@ -189,11 +193,13 @@ class CollectionTrend implements ITrend
             // Filter items within date range
             ->filter(function ($item) {
                 $itemDate = $this->getItemDateAsCarbon($item);
+
                 return $itemDate->isBetween($this->start, $this->end);
             })
             // Group items by date interval
             ->groupBy(function ($item) {
                 $itemDate = $this->getItemDateAsCarbon($item);
+
                 return $itemDate->isoFormat($this->getCarbonDateIsoFormat());
             })
             // Map items to values
@@ -211,6 +217,7 @@ class CollectionTrend implements ITrend
 
             if ($aggregate instanceof Closure) {
                 $aggregatedValue = $aggregate($group);
+
                 return $aggregatedValue;
             }
 
@@ -241,6 +248,7 @@ class CollectionTrend implements ITrend
         if ($column == '*') {
             return $this->aggregate(null, 'count', 0);
         }
+
         return $this->aggregate($column, 'count');
     }
 

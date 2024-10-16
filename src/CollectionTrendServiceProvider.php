@@ -16,9 +16,9 @@ class CollectionTrendServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-collection-trend');
-            // ->hasConfigFile()
-            // ->hasViews()
-            // ->hasMigration('create_laravel_collection_trend_table')
-            // ->hasCommand(CollectionTrendCommand::class);
+        // ->hasConfigFile()
+        // ->hasViews()
+        // ->hasMigration('create_laravel_collection_trend_table')
+        // ->hasCommand(CollectionTrendCommand::class);
     }
 }
