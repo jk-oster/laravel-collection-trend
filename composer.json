@@ -1,10 +1,16 @@
 {
     "name": "jk-oster/laravel-collection-trend",
-    "description": "This is my package laravel-collection-trend",
+    "description": "Generate trends from collections. Easily generate charts or reports.",
+    "type": "library",
     "keywords": [
         "Jakob Osterberger",
         "laravel",
-        "laravel-collection-trend"
+        "laravel-collection-trend",
+        "collections",
+        "data",
+        "reports",
+        "charts",
+        "trends"
     ],
     "homepage": "https://github.com/jk-oster/laravel-collection-trend",
     "license": "MIT",
