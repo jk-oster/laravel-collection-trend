@@ -34,6 +34,11 @@ class CollectionTrend implements ITrend
         return new static($collection);
     }
 
+    public static function collect(Collection|array $collection): self
+    {
+        return new static($collection);
+    }
+
     public function between($start, $end): self
     {
         $this->start = $start;

@@ -14,7 +14,7 @@ Most applications require charts or reports to be generated. Doing this over aga
 
 ## Requirements
 
-**PHP 8.1+**, **Laravel 10+** and **Composer 2.0+** installed.
+**PHP 8.1+** and **Composer 2.0+** installed.
 
 ## Installation & Setup
 
@@ -32,7 +32,7 @@ Example:
 
 ```php
 // Totals per month
-$trend = CollectionTrend::model(User::class)
+$trend = CollectionTrend::make($collectable)
     ->between(
         start: now()->startOfYear(),
         end: now()->endOfYear(),
@@ -41,7 +41,7 @@ $trend = CollectionTrend::model(User::class)
     ->count();
 
 // Average user weight where name starts with a over a span of 11 years, results are grouped per year
-$trend = CollectionTrend::query(User::where('name', 'like', 'a%'))
+$trend = CollectionTrend::make($collectable)
     ->between(
         start: now()->startOfYear()->subYears(10),
         end: now()->endOfYear(),
@@ -52,21 +52,15 @@ $trend = CollectionTrend::query(User::where('name', 'like', 'a%'))
 
 ### Starting a trend
 
-You must either start a trend using ``::model()`` or ``::query()``. The difference between the two is that using ``::query()`` allows you to add additional filters, just like you're used to using eloquent. Using ``::model()`` will just consume it as it is.
+You can either start a trend using ``::make()`` or ``::collect()``.
 
 ```php
-// Model
-CollectionTrend::model(Order::class)
+CollectionTrend::make($collectable)
     ->between(...)
     ->perDay()
     ->count();
 
-// More specific order query
-CollectionTrend::query(
-    Order::query()
-        ->hasBeenPaid()
-        ->hasBeenShipped()
-)
+CollectionTrend::collect($collectable)
     ->between(...)
     ->perDay()
     ->count();
@@ -98,12 +92,12 @@ count('*')
 
 ### Date Column
 
-By default, laravel-trend assumes that the model on which the operation is being performed has a created_at date column. If your model uses a different column name for the date or you want to use a different one, you should specify it using the dateColumn(string $column) method.
+By default, laravel-trend assumes that the model on which the operation is being performed has a ``created_at`` date column. If your model uses a different column name for the date or you want to use a different one, you should specify it using the ``dateColumn(string $column)`` method.
 
 Example:
 
 ```php
-CollectionTrend::model(Order::class)
+CollectionTrend::make($collectable)
     ->dateColumn('custom_date_column')
     ->between(...)
     ->perDay()
