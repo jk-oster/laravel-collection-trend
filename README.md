@@ -1,3 +1,9 @@
+---
+title: "Docs"
+description: "Generate trends from collections. Easily create charts or reports."
+sidebar: auto
+---
+
 # This is my package laravel-collection-trend
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jk-oster/laravel-collection-trend.svg?style=flat-square)](https://packagist.org/packages/jk-oster/laravel-collection-trend)

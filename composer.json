@@ -1,6 +1,6 @@
 {
     "name": "jk-oster/laravel-collection-trend",
-    "description": "Generate trends from collections. Easily generate charts or reports.",
+    "description": "Generate trends from collections. Easily create charts or reports.",
     "type": "library",
     "keywords": [
         "Jakob Osterberger",
