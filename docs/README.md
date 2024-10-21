@@ -1,7 +1,7 @@
 ---
 title: "Docs"
 description: "Generate trends from collections. Easily create charts or reports."
-sidebar: auto
+home: true
 ---
 
 ## Overview
