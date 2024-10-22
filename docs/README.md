@@ -12,7 +12,7 @@ This package is heavily inspired by [laravel-trend](https://github.com/Flowframe
 
 ## Requirements
 
-**PHP 8.1+** and **Composer 2.0+** installed.
+**PHP 8.0+** and **Composer 2.0+** installed.
 
 ## Installation & Setup
 
@@ -24,7 +24,7 @@ composer require jk-oster/laravel-collection-trend
 
 ## Usage
 
-To generate a trend for your collection of items, import the w``JkOster\CollectionTrend\CollectionTrend`` class and pass along a collectable.
+To generate a trend for your collection of items, import the ``JkOster\CollectionTrend\CollectionTrend`` class and pass along a collectable.
 
 Example:
 
@@ -134,7 +134,7 @@ This allows you to work with models that have custom date column names or when y
 
 ### Value Column
 
-By default in laravel-collection-trend you have to pass the column / property name as ``string`` that contains the values you want to aggregate to the aggregate methods. However, like the date column you can also specify a ``Closure```returning a value, which you pass in the aggregate methods.
+By default in laravel-collection-trend you have to pass the column / property name as ``string`` that contains the values you want to aggregate to the aggregate methods. However, like the date column you can also specify a ``Closure`` returning a value, which you pass in the aggregate methods.
 
 Example:
 
@@ -168,9 +168,9 @@ CollectionTrend::make($collectable)
     ->sum('value_column', -1);
 ```
 
-## Compatibility with Flowframe/Laravel-Trend
+## Compatibility with Flowframe/Laravel-Trend API
 
-The interface of the package to the biggest part compatible with the [Laravel-Trend](https://github.com/Flowframe/Laravel-Trend) package. You only need to exchange the ```Trend::model($model)``` calls with ```CollectionTrend::make($collectable)```.
+The interface of the package is to the biggest part compatible with the [Laravel-Trend](https://github.com/Flowframe/Laravel-Trend) package. You only need to exchange the ``Trend::model($model)`` calls with ``CollectionTrend::make($collectable)``.
 
 ## License
 
