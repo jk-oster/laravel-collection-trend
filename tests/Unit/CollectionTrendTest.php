@@ -242,11 +242,11 @@ class CollectionTrendTest extends TestCase
 
         $this->assertEquals([
             new CollectionTrendValue(
-                date: '2021-52',
+                date: '2021-W52',
                 aggregate: 3,
             ),
             new CollectionTrendValue(
-                date: '2022-01',
+                date: '2022-W01',
                 aggregate: 6,
             ),
         ], $trend);
