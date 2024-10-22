@@ -1,12 +1,14 @@
 ---
 title: "Docs"
-description: "Generate trends from collections. Easily create charts or reports."
+description: "Generate trends from laravel collections. Easily create charts or reports."
 home: true
 ---
 
 ## Why?
 
-Most applications require charts or reports to be generated. Doing this over again, and again can be a painful process. That's why I've created a fluent Laravel package to solve this problem. This package is heavily inspired by [laravel-trend](https://github.com/Flowframe/laravel-trend) and uses for the biggest part exactly the same interface for creating trends.
+Most applications require charts or reports to be generated. Doing this over again, and again can be a painful process. For this reason I've created a fluent Laravel package to solve this problem.
+
+This package is heavily inspired by [laravel-trend](https://github.com/Flowframe/laravel-trend) and exhibits for the biggest part exactly the same API for creating trends, however it operates on collections instead of models.
 
 ## Requirements
 

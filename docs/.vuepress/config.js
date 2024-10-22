@@ -6,7 +6,7 @@ export default defineUserConfig({
   bundler: viteBundler(),
   theme: defaultTheme({
     navbar: [
-      { text: 'Code', link: 'https://github.com/jk-oster/laravel-collection-trend' },
+      { text: 'GitHub', link: 'https://github.com/jk-oster/laravel-collection-trend' },
       { text: 'Author', link: 'https://jakobosterberger.com' },
       { text: 'Blog', link: 'https://jakobosterberger.com/posts' }
     ]
