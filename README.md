@@ -1,8 +1,3 @@
----
-title: "Docs"
-description: "Generate trends from collections. Easily create charts or reports."
-sidebar: auto
----
 
 # This is my package laravel-collection-trend
 

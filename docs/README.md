@@ -22,7 +22,7 @@ composer require jk-oster/laravel-collection-trend
 
 ## Usage
 
-To generate a trend for your model, import the ``JkOster\CollectionTrend\CollectionTrend`` class and pass along a collectable.
+To generate a trend for your collection of items, import the w``JkOster\CollectionTrend\CollectionTrend`` class and pass along a collectable.
 
 Example:
 
@@ -36,14 +36,25 @@ $trend = CollectionTrend::make($collectable)
     ->perMonth()
     ->count();
 
-// Average user weight where name starts with a over a span of 11 years, results are grouped per year
-$trend = CollectionTrend::make($collectable)
+// Average user weight where name equals "Jakob", over a span of 11 years and results are grouped per year
+
+$filteredCollection = collect($collectable)->where('name', '=', 'Jakob');
+$trend = CollectionTrend::make($filteredCollection)
     ->between(
         start: now()->startOfYear()->subYears(10),
         end: now()->endOfYear(),
     )
     ->perYear()
     ->average('weight');
+
+// Maximum weight over the last 30 daysts are grouped per day
+$trend = CollectionTrend::make($collectable)
+    ->between(
+        start: now()->subDays(30),
+        end: now(),
+    )
+    ->perDay()
+    ->max('weight');
 ```
 
 ### Starting a trend
@@ -89,7 +100,7 @@ count('*')
 
 ### Date Column
 
-By default, laravel-collection-trend assumes that the model on which the operation is being performed has a ``created_at`` date column. If your model uses a different column name for the date or you want to use a different one, you should specify it using the ``dateColumn(string|Closure $column)`` method.
+By default, laravel-collection-trend assumes that the item on which the operation is being performed has a ``created_at`` date column or property. If your item uses a different column / property name for the date or you want to use a different one, you should specify it using the ``dateColumn(string|Closure $column)`` method.
 
 Example:
 
@@ -113,7 +124,7 @@ This allows you to work with models that have custom date column names or when y
 
 ### Value Column
 
-By default laravel-collection-trend you have to specify the column that contains the values you want to aggregate in the aggregate method. Like the date column you can specify it using a ``string|Closure`` which you pass in the aggregate method.
+By default laravel-collection-trend you have to specify the column / property name that contains the values you want to aggregate in the aggregate method. Like the date column you can specify it using a ``string|Closure`` which you pass in the aggregate methods.
 
 Example:
 
@@ -133,11 +144,12 @@ CollectionTrend::collect($collectable)
 
 ### Empty Data Fillers
 
-By default laravel-collection-trend fills up missing data with the value ``0``. You can change this behavior by passing a ``int`` as second argument to the aggregate method.
+By default laravel-collection-trend fills up missing data with the value ``0``. You can change this behavior by passing a ``int`` as second argument to the aggregate methods.
 
 Example:
 
 ```php
+// Fills up missing data with the value -1
 CollectionTrend::make($collectable)
     ->between(...)
     ->perDay()
