@@ -86,9 +86,12 @@ You can use the following aggregates intervals:
 perMinute()
 perHour()
 perDay()
+perWeek()
 perMonth()
 perYear()
 ```
+
+> TIPP: Make sure that the time you defined in the ``between()`` is the same or a bigger time span than the interval.
 
 ### Aggregates
 
@@ -147,7 +150,7 @@ CollectionTrend::collect($collectable)
     ->sum(fn ($item) => $item['value_column']);
 ```
 
-Using a closure allows you  e.g. to map non numeric values of your items to numeric values for analysis purposes and implement other more advanced operations.
+> TIPP: Using a closure allows you  e.g. to map non numeric values of your items to numeric values for analysis purposes and implement other more advanced operations.
 
 ### Empty Data Fillers / Placeholder Values
 
