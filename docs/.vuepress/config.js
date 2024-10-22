@@ -6,10 +6,21 @@ export default defineUserConfig({
   bundler: viteBundler(),
   theme: defaultTheme({
     navbar: [
-      { text: 'GitHub', link: 'https://github.com/jk-oster/laravel-collection-trend' },
+      { text: 'Installation', link: '/#installation-setup' },
+      { text: 'Usage', link: '/usage.html' },
+      { text: 'Examples', link: '/example.html' },
       { text: 'Author', link: 'https://jakobosterberger.com' },
       { text: 'Blog', link: 'https://jakobosterberger.com/posts' }
-    ]
+    ],
+
+    repo: 'jk-oster/laravel-collection-trend',
+    docsBranch: 'gh-pages',
+    docsDir: './docs',
+    editLink: true,
+    sidebarDepth: 2,
+    sidebar: 'heading',
+    home: '/',
+    colorMode: 'auto',
   }),
 
   lang: 'en-US',
