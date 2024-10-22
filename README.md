@@ -9,7 +9,7 @@
 
 Generate trends from collections. Easily create charts or reports.
 
-For more detailed examples checkout the [docs page](https://jk-oster.github.io/laravel-collection-trend/).
+For detailed examples checkout the [docs page](https://jk-oster.github.io/laravel-collection-trend/).
 
 ## Why?
 
