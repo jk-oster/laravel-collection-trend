@@ -36,8 +36,22 @@ $trend = CollectionTrend::make($collectable)
     ->perMonth()
     ->count();
 
-// Average user weight where name equals "Jakob", over a span of 11 years and results are grouped per year
+// Maximum weight over the last 30 days and results are grouped per day
+$trend = CollectionTrend::make($collectable)
+    ->between(
+        start: now()->subDays(30),
+        end: now(),
+    )
+    ->perDay()
+    ->max('weight');
+```
 
+### Filtering a trend
+
+You can filter a trend by using common filtering methods of Laravel Collections.
+
+```php
+// Average user weight where name equals "Jakob", over a span of 11 years and results are grouped per year
 $filteredCollection = collect($collectable)->where('name', '=', 'Jakob');
 $trend = CollectionTrend::make($filteredCollection)
     ->between(
@@ -46,15 +60,6 @@ $trend = CollectionTrend::make($filteredCollection)
     )
     ->perYear()
     ->average('weight');
-
-// Maximum weight over the last 30 daysts are grouped per day
-$trend = CollectionTrend::make($collectable)
-    ->between(
-        start: now()->subDays(30),
-        end: now(),
-    )
-    ->perDay()
-    ->max('weight');
 ```
 
 ### Starting a trend
@@ -124,7 +129,7 @@ This allows you to work with models that have custom date column names or when y
 
 ### Value Column
 
-By default laravel-collection-trend you have to specify the column / property name that contains the values you want to aggregate in the aggregate method. Like the date column you can specify it using a ``string|Closure`` which you pass in the aggregate methods.
+By default in laravel-collection-trend you have to pass the column / property name as ``string`` that contains the values you want to aggregate to the aggregate methods. However, like the date column you can also specify a ``Closure```returning a value, which you pass in the aggregate methods.
 
 Example:
 
@@ -142,9 +147,11 @@ CollectionTrend::collect($collectable)
     ->sum(fn ($item) => $item['value_column']);
 ```
 
-### Empty Data Fillers
+Using a closure allows you  e.g. to map non numeric values of your items to numeric values for analysis purposes and implement other more advanced operations.
 
-By default laravel-collection-trend fills up missing data with the value ``0``. You can change this behavior by passing a ``int`` as second argument to the aggregate methods.
+### Empty Data Fillers / Placeholder Values
+
+By default laravel-collection-trend fills up missing data points with the placeholder value ``0``. You can change this behavior by passing any ``int`` as second argument to the aggregate methods. However, this is not recommended or required in most cases.
 
 Example:
 
