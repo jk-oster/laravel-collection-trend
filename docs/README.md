@@ -48,7 +48,7 @@ $trend = CollectionTrend::make($collectable)
 
 ### Filtering a trend
 
-You can filter a trend by using common filtering methods of Laravel Collections.
+You can filter a trend by using common filtering methods of [Laravel Collections](https://laravel.com/docs/collections#available-methods).
 
 ```php
 // Average user weight where name equals "Jakob", over a span of 11 years and results are grouped per year
@@ -179,4 +179,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 Thanks to the creators of [flowframe/laravel-trend](https://github.com/Flowframe/laravel-trend) for inspiration.
 
 - [Jakob Osterberger](https://github.com/jk-oster)
-- [All Contributors](../../contributors)
+- [All Contributors](https://github.com/jk-oster/laravel-collection-trend/contributors)
