@@ -4,10 +4,6 @@ description: "Generate trends from collections. Easily create charts or reports.
 home: true
 ---
 
-## Overview
-
-Generate trends from collections. Easily create charts or reports.
-
 ## Why?
 
 Most applications require charts or reports to be generated. Doing this over again, and again can be a painful process. That's why I've created a fluent Laravel package to solve this problem. This package is heavily inspired by [laravel-trend](https://github.com/Flowframe/laravel-trend) and uses for the biggest part exactly the same interface for creating trends.
@@ -26,7 +22,7 @@ composer require jk-oster/laravel-collection-trend
 
 ## Usage
 
-To generate a trend for your model, import the ``JkOster\CollectionTrend\CollectionTrend`` class and pass along a model or query.
+To generate a trend for your model, import the ``JkOster\CollectionTrend\CollectionTrend`` class and pass along a collectable.
 
 Example:
 
@@ -85,6 +81,7 @@ You can use the following aggregates:
 ```php
 sum('column')
 average('column')
+median('column')
 max('column')
 min('column')
 count('*')
@@ -92,7 +89,7 @@ count('*')
 
 ### Date Column
 
-By default, laravel-trend assumes that the model on which the operation is being performed has a ``created_at`` date column. If your model uses a different column name for the date or you want to use a different one, you should specify it using the ``dateColumn(string $column)`` method.
+By default, laravel-collection-trend assumes that the model on which the operation is being performed has a ``created_at`` date column. If your model uses a different column name for the date or you want to use a different one, you should specify it using the ``dateColumn(string|Closure $column)`` method.
 
 Example:
 
@@ -102,6 +99,62 @@ CollectionTrend::make($collectable)
     ->between(...)
     ->perDay()
     ->count();
+
+// Or using a closure
+
+CollectionTrend::collect($collectable)
+    ->dateColumn(fn ($item) => $item['custom_date_column'])
+    ->between(...)
+    ->perDay()
+    ->count();
 ```
 
 This allows you to work with models that have custom date column names or when you want to analyze data based on a different date column.
+
+### Value Column
+
+By default laravel-collection-trend you have to specify the column that contains the values you want to aggregate in the aggregate method. Like the date column you can specify it using a ``string|Closure`` which you pass in the aggregate method.
+
+Example:
+
+```php
+CollectionTrend::make($collectable)
+    ->between(...)
+    ->perDay()
+    ->sum('value_column');
+
+// Or using a closure
+
+CollectionTrend::collect($collectable)
+    ->between(...)
+    ->perDay()
+    ->sum(fn ($item) => $item['value_column']);
+```
+
+### Empty Data Fillers
+
+By default laravel-collection-trend fills up missing data with the value ``0``. You can change this behavior by passing a ``int`` as second argument to the aggregate method.
+
+Example:
+
+```php
+CollectionTrend::make($collectable)
+    ->between(...)
+    ->perDay()
+    ->sum('value_column', -1);
+```
+
+## Compatibility with Flowframe/Laravel-Trend
+
+The interface of the package to the biggest part compatible with the [Laravel-Trend](https://github.com/Flowframe/Laravel-Trend) package. You only need to exchange the ```Trend::model($model)``` calls with ```CollectionTrend::make($collectable)```.
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Credits
+
+Thanks to the creators of [flowframe/laravel-trend](https://github.com/Flowframe/laravel-trend) for inspiration.
+
+- [Jakob Osterberger](https://github.com/jk-oster)
+- [All Contributors](../../contributors)
