@@ -2,7 +2,6 @@
 title: "Docs"
 description: "Generate trends from laravel collections. Easily create charts or reports."
 home: false
-sidebar: "heading"
 footer: "Made with ❤️ by <a href='https://jakobosterberger.com'>Jakob Osterberger</a> (c) 2024"
 footerHtml: true
 actions:
