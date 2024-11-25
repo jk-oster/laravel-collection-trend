@@ -3,6 +3,7 @@ import { defaultTheme } from '@vuepress/theme-default'
 import { defineUserConfig } from 'vuepress'
 import { searchPlugin } from '@vuepress/plugin-search'
 import { shikiPlugin } from '@vuepress/plugin-shiki'
+import matomoPlugin from 'vuepress-plugin-matomo'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -46,6 +47,11 @@ export default defineUserConfig({
 
   plugins: [
     searchPlugin(),
+
+    matomoPlugin({
+      siteId: '4',
+      url: 'https://matomo.caprover.jkoster.com/',
+    }),
 
     // only enable shiki plugin in production mode
     isProd
