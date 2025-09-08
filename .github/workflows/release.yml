@@ -23,7 +23,7 @@ jobs:
           fi
 
       - name: Create GitHub Release
-        uses: ncipollo/release-action@v1.18.0  # Use the latest stable version
+        uses: ncipollo/release-action@v1.20.0  # Use the latest stable version
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}  # Ensure this extracts the tag name correctly
